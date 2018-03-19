@@ -1,0 +1,17 @@
+#!/usr/bin/env zsh
+
+local arg="$1"
+
+case "$arg" in
+    "")
+        __zshero::io::put "No arguments"
+        # __zplug::core::arguments::none
+        ;;
+
+    *)
+        __zshero::io::put "Some arguments"
+        # __zplug::core::arguments::exec "$argv[@]"
+        ;;
+esac
+
+return $status
