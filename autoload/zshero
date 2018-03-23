@@ -1,0 +1,20 @@
+#!/usr/bin/env zsh
+
+local arg="$1"
+
+case "$arg" in
+    install)
+        __zshero::config::install
+        ;;
+    "")
+        __zshero::io::print::put "No arguments"
+        # __zplug::core::arguments::none
+        ;;
+
+    *)
+        __zshero::io::print::put "Some arguments"
+        # __zplug::core::arguments::exec "$argv[@]"
+        ;;
+esac
+
+return $status
