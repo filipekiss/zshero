@@ -23,5 +23,3 @@ __zshero::base "config/*"
 
 
 __zshero::core::core::variables
-
-__zshero::config::backup::make
