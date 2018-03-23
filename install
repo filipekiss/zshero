@@ -1,0 +1,27 @@
+#!/usr/bin/env zsh
+
+(( ! $+commands[git] )) && echo "You need git! Install git and try again!" && exit 12
+
+local CURRENT_FOLDER="${${(%):-%N}:A:h}"
+typeset -gx ZSHERO_INSTALLER_ROOT=${ZSHERO_INSTALLER_ROOT:-${CURRENT_FOLDER}}
+if [[ ! -d "$ZSHERO_INSTALLER_ROOT" ]]; then ZSHERO_INSTALLER_ROOT="$PWD"; fi
+ZSHERO_INSTALLER_ROOT=$(realpath ${ZSHERO_INSTALLER_ROOT})
+
+if [[ -f ${ZSHERO_INSTALLER_ROOT}/.zshero ]]; then
+    echo "Hey. Don't run this inside ZsHero own's folder!"
+    exit 0
+fi
+
+[[ -d ${ZSHERO_INSTALLER_ROOT}/.git ]] || ( echo "Not a git repo" && exit 1 )
+
+export ZSHERO_SUBMODULE_LOCATION=${ZSHERO_SUBMODULE_LOCATION:-${ZSHERO_INSTALLER_ROOT}/zshero}
+
+
+if [[ ! -d $ZSHERO_SUBMODULE_LOCATION ]]; then
+    echo "Adding ZsHero submodule ${ZSHERO_SUBMODULE_LOCATION}"
+    $commands[git] submodule add https://github.com/filipekiss/zshero ${ZSHERO_SUBMODULE_LOCATION}
+fi
+
+source ${ZSHERO_SUBMODULE_LOCATION}/init.zsh
+
+zshero install
