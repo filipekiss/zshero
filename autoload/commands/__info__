@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+__zshero::io::print::put "ZsHero - Version ${ZSHERO_VERSION}"
+__zshero::io::print::info_var "ZSHERO_ROOT"
+__zshero::io::print::info_var "ZSHERO_HOME"
+__zshero::io::print::info_var "ZSHERO_DESTINATION_FOLDER"
+__zshero::io::print::info_var "ZSHERO_CONFIG_FOLDER"

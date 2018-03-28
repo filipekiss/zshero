@@ -1,7 +1,3 @@
-__zshero::io::stow::validate() {
-    (( $+commands[stow] )) || return 1
-}
-
 __zshero::io::stow::exec() {
     local config_name
     config_name="$1"

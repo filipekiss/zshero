@@ -1,0 +1,9 @@
+#!/usr/bin/env zsh
+
+__zshero::base "utils/bin"
+__zshero::utils::bin::check "git" \
+    "You need git! Install git and try again!" || return $status
+
+local CURRENT_FOLDER=$(__zshero::core::root_folder)
+
+__zshero::config::install

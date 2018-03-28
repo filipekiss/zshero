@@ -3,7 +3,23 @@ ZSHERO_LOG_STATUS_ERROR="✖"
 ZSHERO_LOG_STATUS_INFO="→"
 
 __zshero::io::print::inline() {
-    command printf "$@"
+    unset _zshero_newline
+    [[ $# > 0 ]] && command printf "$@"
+}
+
+__zshero::io::print::start_inline() {
+    __zshero::io::print::inline
+}
+__zshero::io::print::end_inline() {
+    __zshero::io::print::reset_newline
+}
+
+__zshero::io::print::newline() {
+    [[ -z $_zshero_newline ]] || command printf $_zshero_newline
+}
+
+__zshero::io::print::reset_newline() {
+    typset -gx _zshero_newline = "\r\n"
 }
 
 __zshero::io::print::put() {
@@ -32,6 +48,16 @@ __zshero::io::print::success() {
     __zshero::io::print::newline
 }
 
-__zshero::io::print::newline() {
-    command printf "\r\n"
+__zshero::io::print::info() {
+    local -a pre_formats
+    pre_formats+=( "$fg[blue]${ZSHERO_LOG_STATUS_INFO}$reset_color" )
+    command printf "$pre_formats[*] $@"
+    __zshero::io::print::newline
+}
+
+__zshero::io::print::info_var() {
+    local -a pre_formats
+    pre_formats+=( "$fg[blue]$1 $reset_color" )
+    command printf "$pre_formats[*]= %s" "${(P)1}"
+    __zshero::io::print::newline
 }

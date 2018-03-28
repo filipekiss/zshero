@@ -3,12 +3,14 @@
 local arg="$1"
 
 case "$arg" in
-    install)
-        __zshero::config::install
+    install|info)
+        shift
+        __zshero::core::run_command \
+            "$arg" \
+            "$argv[@]"
         ;;
     "")
-        __zshero::io::print::put "No arguments"
-        # __zplug::core::arguments::none
+        __zshero::core::run_command "info"
         ;;
 
     *)
