@@ -1,3 +1,4 @@
+# +TODO: Make install able to receive the config name to be installed, default to all configs
 __zshero::config::install() {
     __zshero::base "repository/git"
     __zshero::base "io/stow"
