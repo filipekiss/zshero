@@ -3,7 +3,7 @@
 local arg="$1"
 
 case "$arg" in
-    install|info)
+    install|info|adopt)
         shift
         __zshero::core::run_command \
             "$arg" \

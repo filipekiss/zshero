@@ -62,3 +62,12 @@ __zshero::core::run_command() {
 __zshero::core::root_folder() {
     echo "${${(%):-%N}:A:h}"
 }
+
+__zshero::core::config_folder() {
+    echo ${ZSHERO_HOME}/${ZSHERO_CONFIG_FOLDER}
+}
+
+
+__zshero::core::destination_folder() {
+    echo ${ZSHERO_DESTINATION_FOLDER}
+}
