@@ -1,8 +1,13 @@
 # CHANGELOG
 
+2018-04-19 - 0.4.0
+
+*   Add `zshero adopt` command
+*   Add `zsh add` command
+
 2018-04-04 - 0.3.0
 
-* Add `zshero-installer`
+*   Add `zshero-installer`
 
 2018-03-28 - 0.2.0
 
