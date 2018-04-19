@@ -23,13 +23,12 @@ __zshero::io::stow::adopt() {
         __zshero::io::print::warn "${config_name} not found at $(__zshero::core::config_folder)"
         return
     fi
-    __zshero::io::print::success "Adopting ${config_name}!"
+    __zshero::io::print::info "Adopting ${config_name}!"
     output=$($commands[stow] \
         --ignore ".DS_Store" \
         --target="$(__zshero::core::destination_folder)" \
         --dir="$(__zshero::core::config_folder)" \
         --adopt \
-        --verbose \
         $config_name)
     __zshero::io::print::success "${config_name} adopted!"
 }

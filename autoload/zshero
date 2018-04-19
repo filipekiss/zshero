@@ -3,14 +3,19 @@
 local arg="$1"
 
 case "$arg" in
-    install|info|adopt)
+    install|info|adopt|add)
         shift
         __zshero::core::run_command \
             "$arg" \
             "$argv[@]"
         ;;
     "")
-        __zshero::core::run_command "info"
+        # __zshero::core::run_command "info"
+        __zshero::base "config/config"
+        echo "Calling weird_two" && weird_two "~/.config/.mono"
+        echo "Calling weird_three" && weird_three "arg 1" "arg 2"
+        echo "Calling weird_four" && weird_four "arg 1" "arg 2"
+        echo "Calling weird_five" && weird_five "arg 1" "arg 2"
         ;;
 
     *)

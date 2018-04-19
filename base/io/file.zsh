@@ -12,3 +12,13 @@ __zshero::io::file::copy() {
 __zshero::io::file::check_copy() {
 ( [[ ${__zshero_copied_files[(i)${path_to_check}]} -le ${#__zshero_copied_files} ]] ) || return 1
 }
+
+__zshero::io::file::create() {
+    local file_path="$1"
+    touch $file_path
+}
+
+__zshero::io::is::file() {
+    local file_path="$1"
+    [[ -f $file_path ]]
+}
