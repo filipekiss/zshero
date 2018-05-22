@@ -34,9 +34,9 @@ if [[ -f "${PWD}/zshero-installer" ]]; then
         else
             echo "You'll need either curl or wget to continue. Aborting…" && exit 11
         fi
+        exec "${PWD}/zshero-installer"
+        exit $status
     fi
-    exec "${PWD}/zshero-installer"
-    exit $status
 fi
 
 [[ -f ${PWD}/init.zsh ]] && source ${PWD}/init.zsh
@@ -83,7 +83,4 @@ if [[ ! -f ${ZSHERO_SUBMODULE_LOCATION}/init.zsh ]]; then
     command git submodule init || ( echo "Something went wrong while initializing ZsHero…" && exit 11 )
 fi
 
-# Source ZsHero and run the install command
-# -----------------------------------------
-source ${ZSHERO_SUBMODULE_LOCATION}/init.zsh
-zshero install
+# TODO: Create the interactive setup
