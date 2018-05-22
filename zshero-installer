@@ -12,9 +12,32 @@
 
 # Set defaults
 # ------------
+typeset -gx ZSHERO_INSTALLER_VERSION="0.4.0"
 typeset -g _script_location="${${(%):-%N}:A:h}"
 typeset -g _zshero_default_submodule_location="${ZSHERO_SUBMODULE_LOCATION:-.zshero}"
 typeset -g _zshero_repository="${ZSHERO_REPOSITORY:-https://github.com/filipekiss/zshero}"
+
+[[ "$1" == "source" ]] && return 0
+
+if [[ -f "${PWD}/zshero-installer" ]]; then
+    _zshero_installer_raw_url="https://raw.githubusercontent.com/filipekiss/zshero/master/zshero-installer"
+    (( ! $+functions[is-at-least] )) && autoload is-at-least
+    ZSHERO_CURRENT_VERSION=${ZSHERO_INSTALLER_VERSION}
+    source "${PWD}/zshero-installer" "source"
+    if ! is-at-least $ZSHERO_CURRENT_VERSION ${ZSHERO_INSTALLER_VERSION:-"0.0.1"}; then
+        echo "You have zshero-installer version ${ZSHERO_INSTALLER_VERSION}. Version ${ZSHERO_CURRENT_VERSION} is available…"
+        if (( $+commands[curl] )); then
+            echo "Downloading using cURL"
+            curl -fsSLO ${_zshero_installer_raw_url}
+        elif (( $+commands[wget] )); then
+            wget -qO "${PWD}/zshero-installer" ${_zshero_installer_raw_url}
+        else
+            echo "You'll need either curl or wget to continue. Aborting…" && exit 11
+        fi
+    fi
+    exec "${PWD}/zshero-installer"
+    exit $status
+fi
 
 [[ -f ${PWD}/init.zsh ]] && source ${PWD}/init.zsh
 
