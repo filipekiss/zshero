@@ -1,9 +1,20 @@
 #!/usr/bin/env zsh
+# ZsHero Installer
+# --------------------------------------------------------------------------------
+# Description
+# -----------
+# A script to install ZsHero to any repository.
+# --------------------------------------------------------------------------------
+# Authors
+# -------
+# Filipe Kiss <eu@filipekiss.com.br> http://github.com/filipekiss
+# --------------------------------------------------------------------------------
 
 # Set defaults
-typeset -x _script_location="${${(%):-%N}:A:h}"
-typeset -gx _zshero_default_submodule_location="${ZSHERO_SUBMODULE_LOCATION:-.zshero}"
-typeset -gx _zshero_repository="${ZSHERO_REPOSITORY:-https://github.com/filipekiss/zshero}"
+# ------------
+typeset -g _script_location="${${(%):-%N}:A:h}"
+typeset -g _zshero_default_submodule_location="${ZSHERO_SUBMODULE_LOCATION:-.zshero}"
+typeset -g _zshero_repository="${ZSHERO_REPOSITORY:-https://github.com/filipekiss/zshero}"
 
 [[ -f ${PWD}/init.zsh ]] && source ${PWD}/init.zsh
 
@@ -15,6 +26,7 @@ if (( $+functions[__zshero::base] )); then
 fi
 
 # Check if we are in a git repository
+# -----------------------------------
 if (( ! $+commands[git] )); then
     echo "Git is needed to run ZsHero!"
     exit 127
@@ -27,28 +39,28 @@ if [[ $ret -gt 0 ]]; then
 fi
 
 # Check if zshero submodule is available and init it if it doesn't
-[[ -d ${PWD}/${_zshero_default_submodule_location} ]] && typeset -gx ZSHERO_SUBMODULE_LOCATION="${PWD}/${_zshero_default_submodule_location}"
+# ----------------------------------------------------------------
+[[ -d ${PWD}/${_zshero_default_submodule_location} ]] && typeset -g ZSHERO_SUBMODULE_LOCATION="${PWD}/${_zshero_default_submodule_location}"
 
 if [[ -z $ZSHERO_SUBMODULE_LOCATION ]]; then
-    echo "ZsHero not found! Adding as a submodule…"
+    echo "ZsHero not found! Adding as a submodule ${_zshero_default_submodule_location}…"
     command git submodule add ${_zshero_repository} ${_zshero_default_submodule_location}
-    typeset -gx ZSHERO_SUBMODULE_LOCATION="${PWD}/${_zshero_default_submodule_location}"
+    typeset -g ZSHERO_SUBMODULE_LOCATION="${PWD}/${_zshero_default_submodule_location}"
 fi
 
 # If the submodule folder doesn't exists by now, something broke. Quit.
+# ---------------------------------------------------------------------
 [[ ! -d ${ZSHERO_SUBMODULE_LOCATION:-${PWD}/${_zshero_default_submodule_location}} ]] && echo "Something went wrong! Aborting…" && exit 11
 
 # If the folder exists but the init.zsh is not there, maybe the submodule has not been initialized
 # yet. Let's try that
+# ------------------------------------------------------------------------------------------------
 if [[ ! -f ${ZSHERO_SUBMODULE_LOCATION}/init.zsh ]]; then
     echo "ZsHero seems to be empty. Try to initialize the submodule…"
     command git submodule init || ( echo "Something went wrong while initializing ZsHero…" && exit 11 )
 fi
 
 # Source ZsHero and run the install command
+# -----------------------------------------
 source ${ZSHERO_SUBMODULE_LOCATION}/init.zsh
 zshero install
-
-
-# +TODO: Initizalize ZsHero
-# Add submodule, source init.zsh from submodule, run zshero init command
