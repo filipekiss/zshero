@@ -5,7 +5,7 @@ __zshero::core::core::variables() {
     typeset -gx ZSHERO_VERSION="0.4.0"
     # Use custom user config or the defaults if it's not set
     typeset -gx ZSHERO_HOME=${ZSHERO_HOME:-~/.dotfiles}
-    [[ -f ${ZSHERO_HOME}/.zshero ]] && source "${ZSHERO_HOME}/.zshero"
+    [[ -f ${ZSHERO_HOME}/.zsherorc ]] && source "${ZSHERO_HOME}/.zsherorc"
     typeset -gx ZSHERO_BACKUP=${ZSHERO_BACKUP:-${ZSHERO_ROOT}/backups}
     typeset -gx ZSHERO_SIDEKICKS_FOLDER=${ZSHERO_SIDEKICKS_FOLDER:-sidekicks}
     typeset -gx ZSHERO_DESTINATION_FOLDER=${ZSHERO_DESTINATION_FOLDER:-${HOME}}
