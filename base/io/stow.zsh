@@ -11,7 +11,7 @@ __zshero::io::stow::exec() {
         --ignore ".DS_Store" \
         --target="$(__zshero::core::destination_folder)" \
         --dir="$(__zshero::core::config_folder)" \
-        $config_name
+        "$config_name"
     __zshero::io::print::success "${config_name} installed"
 }
 

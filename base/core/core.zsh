@@ -2,17 +2,22 @@ __zshero::core::core::variables() {
     # make autoload work in another subshell
     export FPATH="$ZSHERO_ROOT/autoload:$FPATH"
 
-    typeset -gx ZSHERO_VERSION="0.3.0"
+    typeset -gx ZSHERO_VERSION="0.4.0"
     # Use custom user config or the defaults if it's not set
     typeset -gx ZSHERO_HOME=${ZSHERO_HOME:-~/.dotfiles}
+    [[ -f ${ZSHERO_HOME}/.zshero ]] && source "${ZSHERO_HOME}/.zshero"
     typeset -gx ZSHERO_BACKUP=${ZSHERO_BACKUP:-${ZSHERO_ROOT}/backups}
-    typeset -gx ZSHERO_CONFIG_FOLDER=${ZSHERO_CONFIG_FOLDER:-config}
+    typeset -gx ZSHERO_SIDEKICKS_FOLDER=${ZSHERO_SIDEKICKS_FOLDER:-sidekicks}
     typeset -gx ZSHERO_DESTINATION_FOLDER=${ZSHERO_DESTINATION_FOLDER:-${HOME}}
 
     # Constants
-    typeset -gx ZSHERO_CONST_NO="NO"
-    typeset -gx ZSHERO_CONST_YES="YES"
-    typeset -gx _zshero_newline="\r\n"
+    typeset -gx -A _zshero_const
+    _zshero_const=(
+    "NO" "NO"
+    "YES" "YES"
+    "NEW_LINE" "\r\n"
+    )
+    typeset -g _zshero_newline=${_zshero_const[NEW_LINE]}
 
     # Exit Status
     typeset -gx -A _zshero_status
@@ -31,7 +36,6 @@ __zshero::core::core::variables() {
     "folder_not_found"       10
     )
 }
-
 
 __zshero::core::abort() {
     __zshero::io::print::error "$1"
@@ -64,9 +68,8 @@ __zshero::core::root_folder() {
 }
 
 __zshero::core::config_folder() {
-    echo ${ZSHERO_HOME}/${ZSHERO_CONFIG_FOLDER}
+    echo ${ZSHERO_HOME}/${ZSHERO_SIDEKICKS_FOLDER}
 }
-
 
 __zshero::core::destination_folder() {
     echo ${ZSHERO_DESTINATION_FOLDER}

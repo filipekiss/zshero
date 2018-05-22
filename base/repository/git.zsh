@@ -6,6 +6,6 @@ __zshero::repository::git::get_files() {
 
 __zshero::repository::git::get_config_folders() {
     typeset -a folders
-    folders=($(find $ZSHERO_HOME/$ZSHERO_CONFIG_FOLDER -maxdepth 1 -mindepth 1 -type d))
-    for folder ($folders) echo ${folder#${ZSHERO_HOME}/${ZSHERO_CONFIG_FOLDER}/*}
+    folders=($(find $ZSHERO_HOME/$ZSHERO_SIDEKICKS_FOLDER -maxdepth 1 -mindepth 1 -type d))
+    for folder ($folders) echo ${folder#${ZSHERO_HOME}/${ZSHERO_SIDEKICKS_FOLDER}/*}
 }

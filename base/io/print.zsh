@@ -19,7 +19,7 @@ __zshero::io::print::newline() {
 }
 
 __zshero::io::print::reset_newline() {
-    typset -gx _zshero_newline = "\r\n"
+    typset -g _zshero_newline = ${_zshero_const[NEW_LINE]}
 }
 
 __zshero::io::print::put() {

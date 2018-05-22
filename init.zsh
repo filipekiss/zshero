@@ -16,10 +16,8 @@ source "$ZSHERO_ROOT/base/init.zsh"
 # Setup autoload
 source "$ZSHERO_ROOT/autoload/init.zsh"
 
-__zshero::base "const/const"
 __zshero::base "io/print"
 __zshero::base "core/*"
 __zshero::base "config/*"
-
 
 __zshero::core::core::variables

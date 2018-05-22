@@ -1,4 +1,3 @@
-# Taken from https://github.com/zplug/zplug/blob/master/init.zsh
 __zshero::base()
 {
     local     load_file arg
@@ -44,7 +43,7 @@ __zshero::base()
     for load_file in "${load_files[@]}"
     do
         if (( $+functions[$load_file] )); then
-            # already defined
+            # already loaded
             continue
         fi
 

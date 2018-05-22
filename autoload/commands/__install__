@@ -6,4 +6,4 @@ __zshero::utils::bin::check "git" \
 
 local CURRENT_FOLDER=$(__zshero::core::root_folder)
 
-__zshero::config::install
+__zshero::config::install "$@"
