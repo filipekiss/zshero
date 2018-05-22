@@ -1,6 +1,6 @@
 __zshero::repository::git::get_files() {
     typeset -a files
-    files=($(command git --work-tree=$ZSHERO_HOME --git-dir=$ZSHERO_HOME/.git ls-files "config/**/*"))
+    files=($(command git --work-tree=$ZSHERO_HOME --git-dir=$ZSHERO_HOME/.git ls-files "${ZSHERO_SIDEKICKS_FOLDER}/**/*"))
     for file ($files) echo ${file#*/*/}
 }
 
