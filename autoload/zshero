@@ -1,5 +1,7 @@
 #!/usr/bin/env zsh
 
+__zshero::core::core::variables
+
 local arg="$1"
 
 case "$arg" in
