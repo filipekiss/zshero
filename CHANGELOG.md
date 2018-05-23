@@ -1,5 +1,11 @@
 # CHANGELOG
 
+2018-05-23 - 0.5.0
+
+*   Read .zsherorc as additional config
+*   Update installer script
+*   Better color output
+
 2018-04-19 - 0.4.0
 
 *   Add `zshero adopt` command

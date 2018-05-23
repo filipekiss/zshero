@@ -2,7 +2,7 @@ __zshero::core::core::variables() {
     # make autoload work in another subshell
     export FPATH="$ZSHERO_ROOT/autoload:$FPATH"
 
-    typeset -gx ZSHERO_VERSION="0.4.0"
+    typeset -gx ZSHERO_VERSION="0.5.0"
     # Use custom user config or the defaults if it's not set
     typeset -gx ZSHERO_HOME=${ZSHERO_HOME:-~/.dotfiles}
     [[ -f ${ZSHERO_HOME}/.zsherorc ]] && source "${ZSHERO_HOME}/.zsherorc"

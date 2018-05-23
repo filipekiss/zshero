@@ -12,7 +12,7 @@
 
 # Set defaults
 # ------------
-typeset -gx ZSHERO_INSTALLER_VERSION="0.4.0"
+typeset -gx ZSHERO_INSTALLER_VERSION="0.5.0"
 typeset -g _script_location="${${(%):-%N}:A:h}"
 typeset -g _zshero_default_submodule_location="${ZSHERO_SUBMODULE_LOCATION:-.zshero}"
 typeset -g _zshero_repository="${ZSHERO_REPOSITORY:-https://github.com/filipekiss/zshero}"
