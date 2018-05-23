@@ -1,6 +1,8 @@
 #!/usr/bin/env zsh
 
+
 __zshero::core::core::variables
+__zshero::core::core::setup_colors
 
 local arg="$1"
 

@@ -7,12 +7,8 @@ fpath=(
 )
 
 autoload -Uz regexp-replace
-autoload -Uz colors
 autoload -Uz compinit
 autoload -Uz zshero
-
-colors
-
 zmodload zsh/system
 zmodload zsh/datetime
 zmodload zsh/parameter

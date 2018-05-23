@@ -74,3 +74,14 @@ __zshero::core::config_folder() {
 __zshero::core::destination_folder() {
     echo ${ZSHERO_DESTINATION_FOLDER}
 }
+
+__zshero::core::core::setup_colors() {
+    if [[ $ZSH_SUBSHELL -lt 1 ]]; then
+        autoload -Uz colors
+        colors
+    else
+        unset fg
+        unset bg
+        unset reset_color
+    fi
+}
