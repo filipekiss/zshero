@@ -32,3 +32,13 @@ __zshero::io::stow::adopt() {
         $config_name)
     __zshero::io::print::success "${config_name} adopted!"
 }
+
+__zshero::io::stow::install() {
+    __zshero::base "utils/ignore"
+    local config_name config_folders config_files
+    sidekicks_location=$(__zshero::core::config_folder)
+    destination_folder=$(__zshero::core::destination_folder)
+    config_name="$1"
+    files_to_install=($(__zshero::utils::ignore::find_config_files ${config_name}))
+    for file ($files_to_install) echo "Installing $file"
+}

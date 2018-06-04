@@ -1,4 +1,3 @@
-# +TODO: Make install able to receive the config name to be installed, default to all configs
 __zshero::config::install() {
     __zshero::base "repository/git"
     __zshero::base "io/stow"
@@ -7,7 +6,17 @@ __zshero::config::install() {
     else
         config_folders=($(__zshero::repository::git::get_config_folders))
     fi
-    __zshero::utils::bin::check "stow" \
-        "Stow is not installed" || return $_zshero_status[command_not_found]
-    for config_folder ($config_folders) __zshero::io::stow::exec $config_folder
+    for config_folder ($config_folders); do
+        local files=($(__zshero::utils::config::find_config_files $config_folder))
+        for file ($files) echo $file
+    done
 }
+
+
+__zshero::utils::config::find_config_files() {
+    __zshero::base "utils/fd"
+    local config_name="$1"
+    local root=$(__zshero::core::config_folder)/${config_name}
+    __zshero::utils::fd::list_install_candidates ${root}
+}
+

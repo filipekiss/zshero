@@ -18,8 +18,8 @@ case "$arg" in
         ;;
 
     *)
-        __zshero::io::print::put "Some arguments"
-        # __zplug::core::arguments::exec "$argv[@]"
+        __zshero::core::run_command \
+            "debug"
         ;;
 esac
 

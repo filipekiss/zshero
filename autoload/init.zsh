@@ -12,3 +12,4 @@ autoload -Uz zshero
 zmodload zsh/system
 zmodload zsh/datetime
 zmodload zsh/parameter
+zmodload zsh/regex
