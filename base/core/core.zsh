@@ -2,16 +2,16 @@ __zshero::core::core::variables() {
     # make autoload work in another subshell
     export FPATH="$ZSHERO_ROOT/autoload:$FPATH"
 
-    typeset -gx ZSHERO_VERSION="0.5.0"
+    typeset -g ZSHERO_VERSION="0.5.0"
     # Use custom user config or the defaults if it's not set
     typeset -gx ZSHERO_HOME=${ZSHERO_HOME:-~/.dotfiles}
     [[ -f ${ZSHERO_HOME}/.zsherorc ]] && source "${ZSHERO_HOME}/.zsherorc"
-    typeset -gx ZSHERO_BACKUP=${ZSHERO_BACKUP:-${ZSHERO_ROOT}/backups}
+    typeset -g ZSHERO_BACKUP=${ZSHERO_BACKUP:-${ZSHERO_ROOT}/backups}
     typeset -gx ZSHERO_SIDEKICKS_FOLDER=${ZSHERO_SIDEKICKS_FOLDER:-sidekicks}
     typeset -gx ZSHERO_DESTINATION_FOLDER=${ZSHERO_DESTINATION_FOLDER:-${HOME}}
 
     # Constants
-    typeset -gx -A _zshero_const
+    typeset -g -A _zshero_const
     _zshero_const=(
     "NO" "NO"
     "YES" "YES"
@@ -20,7 +20,7 @@ __zshero::core::core::variables() {
     typeset -g _zshero_newline=${_zshero_const[NEW_LINE]}
 
     # Exit Status
-    typeset -gx -A _zshero_status
+    typeset -g -A _zshero_status
     _zshero_status=(
     # based on bash scripting
     # - http://tldp.org/LDP/abs/html/exitcodes.html
@@ -35,6 +35,8 @@ __zshero::core::core::variables() {
     # ZsHero Custom Exit Status
     "folder_not_found"       10
     )
+
+    typeset -g -A _zshero_ignore_list
 }
 
 __zshero::core::abort() {
