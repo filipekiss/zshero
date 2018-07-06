@@ -1,0 +1,11 @@
+#!/usr/bin/env zsh
+
+__zshero::base "utils/bin"
+__zshero::base "config/*"
+__zshero::base "io/*"
+__zshero::base "repository/git"
+__zshero::utils::bin::check "git" \
+    "You need git! Install git and try again!" || return $status
+
+config_folders=($(__zshero::repository::git::get_config_folders))
+for config_folder ($config_folders) __zshero::io::stow::install "${config_folder}"

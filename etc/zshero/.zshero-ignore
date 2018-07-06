@@ -1,6 +1,7 @@
-.git/*
+.git
 .gitignore
-^/README.*
-^/LICENSE.*
-.hg/*
+README.*
+LICENSE.*
+.hg*
 .stow-local-ignore
+.DS_Store

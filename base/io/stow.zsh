@@ -39,11 +39,6 @@ __zshero::io::stow::install() {
     sidekicks_location=$(__zshero::core::config_folder)
     destination_folder=$(__zshero::core::destination_folder)
     config_name="$1"
-    config_files=($(find ${sidekicks_location}${config_name}/ -type f))
-    for config_file in ${config_files}; do
-        final_location="${destination_folder}${config_file#${sidekicks_location}/${config_name}}"
-        if ! __zshero::utils::ignore::is_file_ignored "${config_file}"; then
-            echo "Copying from ${config_file} to ${destination_folder}"
-        fi
-    done;
+    files_to_install=($(__zshero::utils::ignore::find_config_files ${config_name}))
+    for file ($files_to_install) echo "Installing $file"
 }
