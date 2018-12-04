@@ -9,10 +9,11 @@ __zshero::io::stow::exec() {
     $commands[stow] \
         --restow \
         --ignore ".DS_Store" \
+        --ignore ".zshero-ignore" \
+        $(__zshero::io::stow::get_ignores "$(__zshero::core::config_folder)/$config_name" ) \
         --target="$(__zshero::core::destination_folder)" \
         --dir="$(__zshero::core::config_folder)" \
-        "$config_name"
-    __zshero::io::print::success "${config_name} installed"
+        "$config_name" && __zshero::io::print::success "${config_name} installed"
 }
 
 __zshero::io::stow::adopt() {
@@ -31,4 +32,15 @@ __zshero::io::stow::adopt() {
         --adopt \
         $config_name)
     __zshero::io::print::success "${config_name} adopted!"
+}
+
+__zshero::io::stow::get_ignores() {
+    local ignore_path="$1"
+    [[ ! -f "$ignore_path/.zshero-ignore" ]] && return 0
+    zmodload zsh/mapfile
+    ignore_lines=("${(f)mapfile[$ignore_path/.zshero-ignore]}")
+    for LINE in $ignore_lines; do
+        [[ $LINE == '#'* ]] && continue
+        echo "--ignore=$LINE"
+    done
 }
